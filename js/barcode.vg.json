@@ -1,0 +1,129 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 400,
+  "config": {
+    "background": "#f7f7f7",
+    "axis": {"grid": false, "domainColor": "none", "ticks": false},
+    "style": {"cell": {"stroke": "transparent"}}
+  },
+  "data": {"url": "data/world-happiness-report-2021.csv"},
+  "encoding": {
+    "x": {
+      "field": "Ladder score",
+      "type": "quantitative",
+      "scale": {"domain": [0, 11]},
+      "axis": {
+        "title": "Happiness Score",
+        "labelAngle": 0,
+        "labelFontSize": 14,
+        "titleFontSize": 18,
+        "titleFont": "Source Sans Pro",
+        "labelFont": "Source Sans Pro",
+        "titlePadding": 10
+      }
+    },
+    "y": {
+      "field": "Region",
+      "type": "nominal",
+      "axis": {
+        "labelAngle": 0,
+        "tickMinStep": 1,
+        "labelFontSize": 14,
+        "titleFontSize": 18,
+        "titleFont": "Source Sans Pro",
+        "labelFont": "Source Sans Pro",
+        "labelLimit": 250,
+        "titlePadding": 55
+      }
+    }
+  },
+  "layer":[{
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dx": 35,
+        "fontSize": 14,
+        "font": "Source Sans Pro",
+        "fontWeight":"bold"
+      },
+      "encoding": {
+        "text": {
+          "field": "Region",
+          "type": "nominal",
+          "condition": [
+            {
+              "test": "datum['Country name'] == 'Mauritius'",
+              "value": ["Most Sub-Saharan Africa countries' score", "are between 3 to 5.4"]
+            },
+            {
+              "test": "datum['Country name'] == 'Finland'",
+              "value": ["All Western Europe countries' score", "are between 5.5 to 7.9"]
+            },
+            {
+              "test": "datum['Country name'] == 'New Zealand'",
+              "value": ["All North America and ANZ countries' score", "are above 6.9"]
+            }
+          ]
+        },
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country name'] == 'Mauritius' || datum['Country name'] == 'Finland' || datum['Country name'] == 'New Zealand'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+    "params": [
+      {
+        "name": "zoom_happinese_score",
+        "select": {"type": "interval"},
+        "bind": "scales"
+      }
+    ],
+    "mark": {"type": "tick", "thickness": 2},
+    "encoding":{
+      "color": {
+        "field": "Region",
+        "type": "nominal",
+        "legend": null,
+        "scale": {
+          "domain": [
+            "Central and Eastern Europe",
+            "Commonwealth of Independent States",
+            "East Asia",
+            "Latin America and Caribbean",
+            "Middle East and North Africa",
+            "North America and ANZ",
+            "South Asia",
+            "Southeast Asia",
+            "Sub-Saharan Africa",
+            "Western Europe"
+          ],
+          "range": [
+            "#1170aa",
+            "#9467bd",
+            "#ff7f00",
+            "#a6cee3",
+            "#f1ce63",
+            "#a65628",
+            "#57606c",
+            "#b6992d",
+            "#ff9d9a",
+            "#17becf"
+          ]
+        }
+      },
+      "tooltip": [
+        {"field": "Country name", "type": "nominal"},
+        {"field": "Region", "type": "nominal"},
+        {"field": "Ladder score", "type": "quantitative", "title": "Happiness Score"}
+      ]
+    }
+  }
+  ]
+}

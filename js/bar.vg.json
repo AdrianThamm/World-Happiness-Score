@@ -1,0 +1,145 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 400,
+    "data": {"url": "data/world-happiness-report-2021.csv"},
+    "config": {
+      "background": "#f7f7f7",
+      "axis": {"grid": false},
+      "style": {"cell": {"stroke": "transparent"}}
+    },
+    "transform": [
+      {
+        "window": [{"op": "rank", "as": "rank"}],
+        "sort": [{"field": "Ladder score", "order": "descending"}]
+      },
+      {"filter": "datum.rank <= 10"}
+    ],
+    "encoding": {
+      "y": {
+        "field": "Country name",
+        "type": "nominal",
+        "title": "Country",
+        "scale": {"padding": 0.3},
+        "sort": {"field": "Ladder score", "order": "descending"},
+        "axis": null
+      },
+      "x": {
+        "field": "Ladder score",
+        "type": "quantitative",
+        "aggregate": "sum",
+        "title": "Happiness Score",
+        "axis": null
+      }
+    },
+    "layer": [
+      {
+        "params": [
+            {"name": "highlight","select": {"type": "point", "on": "mouseover"}},
+            {"name": "select", "select": "point"}
+        ],
+        "mark": {
+          "type": "bar",
+          "cornerRadius": 3,
+          "stroke": "black",
+          "cursor": "pointer",
+          "fill":"#325d79"
+        },
+        "encoding": {
+            "tooltip": [
+                {"field": "Country name", "type": "nominal"},
+                {"field": "Ladder score", "type": "quantitative"},
+                {"field": "Freedom to make life choices", "type": "quantitative"},
+                {"field": "Logged GDP per capita", "type": "quantitative"},
+                {"field": "Social support", "type": "quantitative"},
+                {"field": "Healthy life expectancy", "type": "quantitative"}
+            ],
+            "color": {
+                "field": "Country name",
+                "type": "nominal",
+                "legend": null
+            },
+            "fillOpacity": {
+                "condition": {"param": "select", "value": 1},
+                "value": 0.3
+            },
+            "strokeWidth": {
+                "condition": [
+                {
+                    "param": "select",
+                    "empty": false,
+                    "value": 2
+                },
+                {
+                    "param": "highlight",
+                    "empty": false,
+                    "value": 1
+                }
+                ],
+                "value": 0
+            }
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": 120,
+          "fontSize": 18,
+          "font": "Source Sans Pro"
+        },
+        "encoding": {
+          "text": {"field": "Country name", "type": "nominal"},
+          "color": {
+            "condition": [
+              {
+                "test": "datum['Country name'] == 'Finland'",
+                "value": "#1b1464"
+              },
+              {
+                "test": "datum['Country name'] == 'Denmark'",
+                "value": "#003471"
+              },
+              {
+                "test": "datum['Country name'] == 'Switzerland'",
+                "value": "#00433E"
+              }
+            ],
+            "value": "#363636"
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": 180,
+          "fontSize": 18,
+          "font": "Source Sans Pro",
+          "fontWeight": "bold"
+        },
+        "encoding": {
+          "text": {"field": "Ladder score", "type": "quantitative"},
+          "color": {
+              "condition": [
+              {
+                "test": "datum['Country name'] == 'Finland'",
+                "value": "#1b1464"
+              },
+              {
+                "test": "datum['Country name'] == 'Denmark'",
+                "value": "#003471"
+              },
+              {
+                "test": "datum['Country name'] == 'Switzerland'",
+                "value": "#00433E"
+              }
+            ],
+            "value": "#363636"
+          }
+        }
+      }
+    ]
+  }

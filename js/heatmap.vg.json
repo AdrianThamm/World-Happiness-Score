@@ -1,0 +1,71 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 3600,
+    "data": {"url": "data/world-happiness-report.csv"},
+    "config": {
+      "axis": {
+        "tickBand": "extent",
+        "grid": true,
+        "gridColor": "#white",
+        "domainWidth": 1
+      },
+      "background": "#f7f7f7"
+    },
+    "layer": [
+      {"mark": {"type": "rect", "fill": "#e6e4e6", "stroke": "#f7f7f7"}},
+      {
+        "params": [
+          {"name": "highlight", "select": {"type": "point", "on": "mouseover"}}
+        ],
+        "mark": "rect",
+        "encoding": {
+          "x": {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year",
+            "axis": {
+              "labelAngle": 0,
+              "labelFontSize": 16,
+              "titleFontSize": 18,
+              "titleFont": "Source Sans Pro",
+              "labelFont": "Source Sans Pro"
+            }
+          },
+          "y": {
+            "field": "Country",
+            "type": "nominal",
+            "axis": {
+              "labelFontSize": 16,
+              "titleFontSize": 18,
+              "titleFont": "Source Sans Pro",
+              "labelFont": "Source Sans Pro"
+            }
+          },
+          "color": {
+            "field": "Freedom to make life choices",
+            "type": "quantitative",
+            "legend": {
+                "title": ["The extend which ", "freedom to make life ", "choices contributes to ", "happiness score"],
+                "labelFontSize": 14,
+                "symbolSize": 200,
+                "titleFontSize": 16,
+                "labelLimit": 500,
+                "titleFont": "Source Sans Pro",
+                "labelFont": "Source Sans Pro"
+            },
+            "scale": {"scheme": "yellowgreenblue"}
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Life Ladder", "type": "quantitative"},
+            {"field": "Freedom to make life choices", "type": "quantitative"}
+          ],
+          "fillOpacity": {
+            "condition": [{"param": "highlight", "value": 1}],
+            "value": 0.3
+          }
+        }
+      }
+    ]
+  }

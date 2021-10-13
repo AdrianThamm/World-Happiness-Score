@@ -1,0 +1,147 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "data/world-happiness-report.csv"},
+    "config": {
+      "background": "#f7f7f7",
+      "style": {"cell": {"stroke": "transparent"}}
+    },
+    "params": [
+      {
+        "name": "top_n",
+        "value": 10,
+        "bind": {
+          "input": "range",
+          "min": 1,
+          "max": 20,
+          "step": 1,
+          "name": "Top N Countries"
+        }
+      }
+    ],
+    "transform": [
+      {
+        "sort": [{"field": "Life Ladder", "order": "descending"}],
+        "window": [{"op": "rank", "as": "Rank"}],
+        "groupby": ["year"]
+      },
+      {"filter": "datum.Rank <= top_n"}
+    ],
+    "vconcat": [
+      {
+        "width": 900,
+        "height": 500,
+        "transform": [{"filter": {"param": "time_brush"}}],
+        "encoding": {
+          "x": {
+            "field": "year",
+            "type": "ordinal",
+            "axis": {
+              "labelAngle": 0,
+              "labelFontSize": 18,
+              "titleFontSize": 20,
+              "titleFont": "Source Sans Pro",
+              "labelFont": "Source Sans Pro",
+              "ticks":false,
+              "domain": false
+            },
+            "title": "Year"
+          },
+          "y": {
+            "field": "Rank",
+            "type": "quantitative",
+            "sort": "descending",
+            "scale": {"domain": [0.5, {"expr": "top_n+0.5"}]},
+            "axis": {
+              "labelAngle": 0,
+              "tickMinStep": 1,
+              "tickCount": {"expr": "top_n"},
+              "labelFontSize": 18,
+              "titleFontSize": 20,
+              "titleFont": "Source Sans Pro",
+              "labelFont": "Source Sans Pro",
+              "ticks":false,
+              "domain": false
+            },
+            "title": "Country's Ranking"
+          }
+        },
+        "layer": [
+          {
+            "params": [
+              {
+                "name": "country_highlight",
+                "select": {"type": "point", "fields": ["Country"]},
+                "bind": "legend"
+              }
+            ],
+            "mark": {"type": "line", "interpolate": "monotone"},
+            "encoding": {
+              "color": {
+                "field": "Country",
+                "scale": {"scheme": "dark2"},
+                "legend": {
+                  "labelFontSize": 14,
+                  "symbolSize": 150,
+                  "titleFontSize": 16,
+                  "titleFont": "Source Sans Pro",
+                  "labelFont": "Source Sans Pro"
+                }
+              },
+              "tooltip": [
+                {"field": "Country", "type": "nominal"},
+                {"field": "Rank", "type": "quantitative"},
+                {"field": "Life Ladder", "type": "quantitative"}
+              ],
+              "opacity": {
+                "condition": {"param": "country_highlight", "value": 0.6},
+                "value": 0.2
+              }
+            }
+          },
+          {
+            "params": [
+              {
+                "name": "country_highlight2",
+                "select": {"type": "point", "fields": ["Country"]},
+                "bind": "legend"
+              },
+              {"name": "highlight", "select": {"type": "point", "on": "mouseover"}}
+            ],
+            "mark": {"type": "tick", "thickness": 5},
+            "encoding": {
+              "size": {
+                "condition": 
+                  {"param": "highlight", "empty": false, "value": 25},
+                "value": 15
+              },
+              "color": {"field": "Country", "scale": {"scheme": "dark2"}},
+              "tooltip": [
+                {"field": "Country", "type": "nominal"},
+                {"field": "Rank", "type": "quantitative"},
+                {"field": "Life Ladder", "type": "quantitative"}
+              ],
+              "opacity": {
+                "condition": {"param": "country_highlight2", "value": 0.6},
+                "value": 0.2
+              }
+            }
+          }
+        ]
+      },
+      {
+        "width": 900,
+          "height": 60,
+          "mark": {"type":"line","color":"#325d79"},
+          "title": {"text":"Year range to display:", "fontSize":16, "font": "Source Sans Pro"},
+          "params": [
+            {
+              "name": "time_brush",
+              "select": {"type": "interval", "encodings": ["x"]}
+            }
+          ],
+          "encoding": {
+            "x": {"field": "year", "axis": {"title": "Year", "labelAngle": 0, "titleFontSize":14, "labelFontSize":14, "titleFont": "Source Sans Pro", "labelFont": "Source Sans Pro"}}
+          }
+      }
+    ]
+  }
