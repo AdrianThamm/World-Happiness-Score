@@ -95,7 +95,7 @@
             "condition": [
               {
                 "test": "datum['Country name'] == 'Finland'",
-                "value": "#1b1464"
+                "value": "#750000"
               },
               {
                 "test": "datum['Country name'] == 'Denmark'",
@@ -126,7 +126,7 @@
               "condition": [
               {
                 "test": "datum['Country name'] == 'Finland'",
-                "value": "#1b1464"
+                "value": "#AC0000"
               },
               {
                 "test": "datum['Country name'] == 'Denmark'",

@@ -68,7 +68,7 @@
             "titleColor": "#363636",
             "labelColor": "#363636"
           },
-          "scale": {"scheme": "viridis"}
+          "scale": {"scheme": "viridis", "reverse":true}
         },
         "tooltip": [
           {
