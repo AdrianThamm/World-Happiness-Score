@@ -42,22 +42,33 @@
           "type": "bar",
           "cornerRadius": 3,
           "stroke": "black",
-          "cursor": "pointer",
-          "fill":"#325d79"
+          "cursor": "pointer"
         },
         "encoding": {
             "tooltip": [
                 {"field": "Country name", "type": "nominal"},
-                {"field": "Ladder score", "type": "quantitative"},
+                {"field": "Ladder score", "type": "quantitative", "title": "Happiness score"},
                 {"field": "Freedom to make life choices", "type": "quantitative"},
                 {"field": "Logged GDP per capita", "type": "quantitative"},
                 {"field": "Social support", "type": "quantitative"},
                 {"field": "Healthy life expectancy", "type": "quantitative"}
             ],
             "color": {
-                "field": "Country name",
-                "type": "nominal",
-                "legend": null
+                "condition": [
+                  {
+                    "test": "datum['Country name'] == 'Finland'",
+                    "value": "#A57C00"
+                  },
+                  {
+                    "test": "datum['Country name'] == 'Denmark'",
+                    "value": "#757575"
+                  },
+                  {
+                    "test": "datum['Country name'] == 'Switzerland'",
+                    "value": "#A36424"
+                  }
+                ],
+                "value": "#D9D9D9"
             },
             "fillOpacity": {
                 "condition": {"param": "select", "value": 1},
@@ -73,7 +84,7 @@
                 {
                     "param": "highlight",
                     "empty": false,
-                    "value": 1
+                    "value": 3
                 }
                 ],
                 "value": 0
@@ -95,18 +106,18 @@
             "condition": [
               {
                 "test": "datum['Country name'] == 'Finland'",
-                "value": "#750000"
+                "value": "#A57C00"
               },
               {
                 "test": "datum['Country name'] == 'Denmark'",
-                "value": "#003471"
+                "value": "#757575"
               },
               {
                 "test": "datum['Country name'] == 'Switzerland'",
-                "value": "#00433E"
+                "value": "#A36424"
               }
             ],
-            "value": "#363636"
+            "value": "#212121"
           }
         }
       },
@@ -126,18 +137,18 @@
               "condition": [
               {
                 "test": "datum['Country name'] == 'Finland'",
-                "value": "#AC0000"
+                "value": "#A57C00"
               },
               {
                 "test": "datum['Country name'] == 'Denmark'",
-                "value": "#003471"
+                "value": "#757575"
               },
               {
                 "test": "datum['Country name'] == 'Switzerland'",
-                "value": "#00433E"
+                "value": "#A36424"
               }
             ],
-            "value": "#363636"
+            "value": "#212121"
           }
         }
       }

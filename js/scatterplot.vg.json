@@ -125,8 +125,8 @@
         },
         "encoding": {
           "fillOpacity": {
-            "condition": {"param": "select", "value": 1},
-            "value": 0.3
+            "condition": [{"param": "select", "empty": false, "value": 1},{"param": "region_highlight", "empty": false, "value": 1}],
+            "value": 0.5
           },
           "strokeWidth": {
             "condition": [
@@ -159,7 +159,7 @@
                 "#1170aa",
                 "#9467bd",
                 "#ff7f00",
-                "#a6cee3",
+                "#59a14f",
                 "#f1ce63",
                 "#a65628",
                 "#57606c",
@@ -172,19 +172,16 @@
               "labelFontSize": 14,
               "symbolSize": 200,
               "titleFontSize": 16,
-              "labelLimit": 500,
+              "labelLimit": 250,
               "titleFont": "Source Sans Pro",
               "labelFont": "Source Sans Pro"
             }
           },
-          "opacity": {
-            "condition": {"param": "region_highlight", "value": 0.6},
-            "value": 0.2
-          },
+
           "tooltip": [
             {"field": "Country name", "type": "nominal"},
             {"field": "Region", "type": "nominal"},
-            {"field": "Ladder score", "type": "quantitative"},
+            {"field": "Ladder score", "type": "quantitative", "title": "Happiness score"},
             {"field": "Healthy life expectancy", "type": "quantitative"}
           ]
         }
@@ -198,26 +195,6 @@
           "y": {"field": "Ladder score", "type": "quantitative"},
           "x": {"field": "Healthy life expectancy", "type": "quantitative"}
         }
-      },
-    {
-      "transform": [
-        {
-          "regression": "Ladder score",
-          "on": "Healthy life expectancy",
-          "params": true
-        },
-        {"calculate": "'R²: '+format(datum.rSquared, '.2f')", "as": "R2"}
-      ],
-      "mark": {
-        "type": "text",
-        "color": "firebrick",
-        "x": "width",
-        "align": "right",
-        "y": -5
-      },
-      "encoding": {
-        "text": {"type": "nominal", "field": "R2"}
       }
-    }
     ]
   }

@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
-    "height": 3600,
+    "height": 700,
     "data": {"url": "data/world-happiness-report.csv"},
     "config": {
       "axis": {
@@ -12,6 +12,8 @@
       },
       "background": "#f7f7f7"
     },
+    "transform": [
+      {"filter": "datum.Country =='Afghanistan' || datum.Country =='Albania' || datum.Country =='Finland' || datum.Country =='Denmark' || datum.Country =='Armenia' || datum.Country =='Australia' || datum.Country =='Belgium' || datum.Country =='Bosnia and Herzegovina' || datum.Country =='Canada' || datum.Country =='China' || datum.Country =='Haiti' || datum.Country =='Italy'  || datum.Country =='Kosovo' || datum.Country =='Malaysia' || datum.Country =='Netherlands' || datum.Country =='New Zealand' || datum.Country =='Norway' || datum.Country =='Pakistan' || datum.Country =='Russia' || datum.Country =='Sweden' || datum.Country =='Switzerland' || datum.Country =='United Kingdom' || datum.Country =='United States' || datum.Country =='Venezuela' || datum.Country =='Zimbabwe'" }],
     "encoding": {
       "x": {
         "field": "year",
@@ -19,7 +21,7 @@
         "title": "Year",
         "axis": {
           "labelAngle": 0,
-          "labelFontSize": 16,
+          "labelFontSize": 14,
           "titleFontSize": 18,
           "titleFont": "Source Sans Pro",
           "labelFont": "Source Sans Pro"
@@ -60,7 +62,8 @@
           },
           "tooltip": [
             {"field": "Country", "type": "nominal"},
-            {"field": "Life Ladder", "type": "quantitative"},
+            {"field": "year", "type": "ordinal", "title": "Year"},
+            {"field": "LifeLadder", "type": "quantitative", "title": "Happiness score"},
             {"field": "Freedom to make life choices", "type": "quantitative"}
           ],
           "fillOpacity": {
@@ -79,7 +82,7 @@
           "font": "Source Sans Pro"
         },
         "encoding": {
-          "text": {"field": "Freedom to make life choices", "type": "quantitative"},
+          "text": {"field": "Freedom to make life choices", "type": "quantitative", "format":".2f"},
           "color": {
             "condition": [
             {

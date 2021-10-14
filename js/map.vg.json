@@ -76,7 +76,7 @@
             "type": "nominal",
             "title": "Country"
           },
-          {"field": "Ladder score", "type": "quantitative"}
+          {"field": "Ladder score", "type": "quantitative", "title": "Happiness score"}
         ]
       }
     }
