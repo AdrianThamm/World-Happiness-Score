@@ -49,7 +49,6 @@
         },
         "strokeWidth": {
           "condition": [
-            {"param": "select", "empty": false, "value": 3},
             {"param": "highlight", "empty": false, "value": 2}
           ],
           "value": 0.5

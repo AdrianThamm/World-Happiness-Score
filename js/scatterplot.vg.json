@@ -125,7 +125,7 @@
         },
         "encoding": {
           "fillOpacity": {
-            "condition": [{"param": "select", "empty": false, "value": 1},{"param": "region_highlight", "empty": false, "value": 1}],
+            "condition": [{"param": "select", "empty": false, "value": 1},{"param": "region_highlight", "empty": false, "value": 1},{"param": "highlight", "empty": false, "value": 1}],
             "value": 0.5
           },
           "strokeWidth": {

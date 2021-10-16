@@ -96,8 +96,8 @@
                 {"field": "LifeLadder", "type": "quantitative", "title": "Happiness score"}
               ],
               "opacity": {
-                "condition": {"param": "country_highlight2", "value": 0.6},
-                "value": 0.2
+                "condition": {"param": "country_highlight2", "value": 1},
+                "value": 0.1
               }
             }
           },
@@ -122,8 +122,8 @@
                 {"field": "LifeLadder", "type": "quantitative", "title": "Happiness score"}
               ],
               "opacity": {
-                "condition": {"param": "country_highlight", "value": 0.6},
-                "value": 0.2
+                "condition": {"param": "country_highlight", "value": 1},
+                "value": 0.1
               }
             }
           }
