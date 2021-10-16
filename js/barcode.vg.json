@@ -12,7 +12,7 @@
     "x": {
       "field": "Ladder score",
       "type": "quantitative",
-      "scale": {"domain": [2, 10.5]},
+      "scale": {"domain": [2, 10]},
       "axis": {
         "title": "Happiness Score",
         "labelAngle": 0,
