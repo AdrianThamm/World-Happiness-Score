@@ -1,4 +1,8 @@
-{
+var clientWidth = document.getElementById('rank_chart').clientWidth;
+var clientHeight = document.getElementById('rank_chart').clientHeight;
+
+
+var rank = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {"url": "data/world-happiness-report.csv"},
     "config": {
@@ -28,7 +32,7 @@
     ],
     "vconcat": [
       {
-        "width": "container",
+        "width": (clientWidth)*0.73,
         "height": 400,
         "transform": [{"filter": {"param": "time_brush"}}],
         "encoding": {
@@ -37,7 +41,7 @@
             "type": "ordinal",
             "axis": {
               "labelAngle": 0,
-              "labelFontSize": 16,
+              "labelFontSize": 14,
               "titleFontSize": 18,
               "titleFont": "Source Sans Pro",
               "labelFont": "Source Sans Pro",
@@ -55,7 +59,7 @@
               "labelAngle": 0,
               "tickMinStep": 1,
               "tickCount": {"expr": "top_n"},
-              "labelFontSize": 16,
+              "labelFontSize": 14,
               "titleFontSize": 18,
               "titleFont": "Source Sans Pro",
               "labelFont": "Source Sans Pro",
@@ -118,7 +122,7 @@
         ]
       },
       {
-        "width": "container",
+        "width": (clientWidth)*0.73,
           "height": 60,
           "mark": {"type":"line","color":"#325d79"},
           "title": {"text":"Year range to display:", "fontSize":16, "font": "Source Sans Pro"},
@@ -134,3 +138,5 @@
       }
     ]
   }
+
+vegaEmbed('#rank_chart', rank, {"actions": false});

@@ -183,7 +183,6 @@
     var map = "js/map.vg.json";
     var scatterplot = "js/scatterplot.vg.json";
     var bar = "js/bar.vg.json";
-    var rank = "js/rank.vg.json";
     var heatmap = "js/heatmap.vg.json";
     var barcode = "js/barcode.vg.json";
 
@@ -203,14 +202,12 @@
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#rank_chart', rank, {"actions": false}).then(function(result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
-
     vegaEmbed('#heatmap', heatmap, {"actions": false}).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
+
+<script src="rank_chart.js"></script>
 
 </body>
 </html>

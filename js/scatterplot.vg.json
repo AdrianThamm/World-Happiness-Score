@@ -126,7 +126,7 @@
         "encoding": {
           "fillOpacity": {
             "condition": [{"param": "select", "empty": false, "value": 1},{"param": "region_highlight", "empty": false, "value": 1},{"param": "highlight", "empty": false, "value": 1}],
-            "value": 0.5
+            "value": 0.4
           },
           "strokeWidth": {
             "condition": [
@@ -177,7 +177,6 @@
               "labelFont": "Source Sans Pro"
             }
           },
-
           "tooltip": [
             {"field": "Country name", "type": "nominal"},
             {"field": "Region", "type": "nominal"},
